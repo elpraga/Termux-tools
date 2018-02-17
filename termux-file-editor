@@ -26,9 +26,9 @@ then
 	# Note the -sPAPERSIZE=a4 ps2pdf option. Final PDFs resulted missing a part without it.
 	pdf2ps "$1" - | /data/data/com.termux/files/usr/local/bin/psnup -pa4 -2 | ps2pdf -sPAPERSIZE=a4 - "$filename_print.pdf"
 	# Save the final file in the Downloads directory, so that it can be reached by other apps
-	mv "$filename_print.pdf" "/data/data/com.termux/files/home/storage/downloads/Madison Place/" 2>/dev/null
+	mv "$filename_print.pdf" "/data/data/com.termux/files/home/storage/downloads/" 2>/dev/null
 	filename_print=${filename_print:43} 
-	termux-open "/data/data/com.termux/files/home/storage/downloads/Madison Place/$filename_print.pdf"
+	termux-open "/data/data/com.termux/files/home/storage/downloads/$filename_print.pdf"
 else
 
 if [ $your_choice = "d" ] 
@@ -72,7 +72,7 @@ then
 	# Let's get rid of the .pdf extension:
 	filename=${filename::-4}
 	# Save the final file in the Downloads directory, so that it can be reached by other apps
-	cd "/data/data/com.termux/files/home/storage/downloads/Madison Place"
+	cd "/data/data/com.termux/files/home/storage/downloads/"
 	pdf2ps "$1-duplicated.pdf" - | /data/data/com.termux/files/usr/local/bin/psnup -pa4 -2 | ps2pdf -sPAPERSIZE=a4 - "$filename-duplicated-2-up_ed.pdf"
 	#echo Removed  "$1-duplicated.pdf"
 	rm "$1-duplicated.pdf"
