@@ -23,3 +23,10 @@ $ make PERL=$PREFIX/bin/perl BINDIR=$PREFIX/local/bin INCLUDEDIR=$PREFIX/local/i
 pip3 install --upgrade youtube-dl 
 pip3 install --upgrade mps-youtube 
 ```
+#### Configure Termux's access to storage
+
+run `termux-setup-storage`
+
+#### Copy the files 
+
+Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin`
