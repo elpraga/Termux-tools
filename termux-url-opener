@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/storage/downloads/Madison\ Place/
+cd ~/storage/downloads/
 
 echo $1 >> test.txt
 echo Checking available resolutions...
