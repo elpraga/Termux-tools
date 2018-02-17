@@ -2,7 +2,6 @@
 
 cd ~/storage/downloads/
 
-echo $1 >> test.txt
 echo Checking available resolutions...
 echo 
 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/ytdl $1
