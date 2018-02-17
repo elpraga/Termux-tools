@@ -1,0 +1,87 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+echo 
+echo What transformation do you want to do?
+echo 
+echo "Press    [u] Enter    to simply 2-up the A4 PDF file    [ 1 2 ]  [ 3 4 ] ..."
+echo "Press    [d] Enter    to double 2-up the A4 PDF file    [ 1 1 ]  [ 2 2 ] ..."
+echo
+echo "or anything else to exit..."
+echo 
+
+read your_choice
+
+if [ $your_choice = "u" ] 
+then
+	#echo Full filename is : $1
+	# Let's get rid of the .pdf extension:
+	filename=${1::-4}
+	#echo Filename without externsion is: $filename
+
+	filename_print=$filename`echo _print`
+
+	echo Creating the 2-up [ 1 2 ][ 3 4 ] ... [ n-1  n ]
+	echo Please be patient as this may take some time, especially when the file contains images. Final file will be opened automatically once ready.
+	echo
+	# Note the -sPAPERSIZE=a4 ps2pdf option. Final PDFs resulted missing a part without it.
+	pdf2ps "$1" - | /data/data/com.termux/files/usr/local/bin/psnup -pa4 -2 | ps2pdf -sPAPERSIZE=a4 - "$filename_print.pdf"
+	# Save the final file in the Downloads directory, so that it can be reached by other apps
+	mv "$filename_print.pdf" "/data/data/com.termux/files/home/storage/downloads/Madison Place/" 2>/dev/null
+	filename_print=${filename_print:43} 
+	termux-open "/data/data/com.termux/files/home/storage/downloads/Madison Place/$filename_print.pdf"
+else
+
+if [ $your_choice = "d" ] 
+then
+	filepath="/data/data/com.termux/files/home/downloads/"
+	filename=${1:43} 
+	#echo filename is: $filename 
+	echo
+	echo
+	echo
+	echo Understood. Preparing double 2-up ed file from $filename
+	echo
+	echo Separating individual pages...
+	/data/data/com.termux/files/usr/bin/pdfseparate "$1" "$1-%d" 
+	#/data/data/com.termux/files/usr/bin/pdfseparate "$filename" "$filename-%d" 
+	echo
+	echo Duplicating pages...
+	for page in "$1-"*
+	do
+		echo page $page 
+		# following saves the last character into the variable
+		pagenumber="${page:(-1)}" 
+		#echo $pagenumber
+		/data/data/com.termux/files/usr/bin/pdfunite "$page" "$page" "$1-duplicated-$pagenumber"
+		rm "$page"
+	done
+	echo
+	echo Joining double pages together into one file...
+	#for pageduplicated in "$page-duplicated-"*
+	#do
+	#echo page $pageduplicated 
+	pageduplicated=`echo $1-duplicated-`
+	/data/data/com.termux/files/usr/bin/pdfunite "$pageduplicated"* "$1-duplicated.pdf"
+	rm "$1-duplicated-"*
+	#done
+	echo done.
+	echo 
+	echo Creating the final 2-up [ 1 1 ][ 2 2 ] ... [ n n ]
+	echo Please be patient as this may take some time, especially when the file contains images. Final file will be opened automatically once ready.
+	echo
+	# Let's get rid of the .pdf extension:
+	filename=${filename::-4}
+	# Save the final file in the Downloads directory, so that it can be reached by other apps
+	cd "/data/data/com.termux/files/home/storage/downloads/Madison Place"
+	pdf2ps "$1-duplicated.pdf" - | /data/data/com.termux/files/usr/local/bin/psnup -pa4 -2 | ps2pdf -sPAPERSIZE=a4 - "$filename-duplicated-2-up_ed.pdf"
+	#echo Removed  "$1-duplicated.pdf"
+	rm "$1-duplicated.pdf"
+	#echo Removed "$1"
+	rm "$1"
+	termux-open "$filename-duplicated-2-up_ed.pdf"
+else
+	echo
+	echo No option selected. Exiting...	
+fi
+
+fi
