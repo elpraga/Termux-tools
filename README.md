@@ -29,4 +29,4 @@ run `termux-setup-storage`
 
 #### Copy the files 
 
-Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin/*`
+Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin/termux-*`
