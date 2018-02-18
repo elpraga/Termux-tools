@@ -27,14 +27,14 @@ then
 	pdf2ps "$1" - | /data/data/com.termux/files/usr/local/bin/psnup -pa4 -2 | ps2pdf -sPAPERSIZE=a4 - "$filename_print.pdf"
 	# Save the final file in the Downloads directory, so that it can be accessed by other apps
 	mv "$filename_print.pdf" "/data/data/com.termux/files/home/storage/downloads/" 2>/dev/null
-	filename_print=${filename_print:43} 
+	filename_print=${filename_print:32} 
 	termux-open "/data/data/com.termux/files/home/storage/downloads/$filename_print.pdf"
 else
 
 if [ $your_choice = "d" ] 
 then
 	filepath="/data/data/com.termux/files/home/downloads/"
-	filename=${1:43} 
+	filename=${1:32} 
 	#echo filename is: $filename 
 	echo
 	echo
