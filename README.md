@@ -7,7 +7,7 @@ Big thanks to [@tomty89](https://github.com/termux/termux-packages/issues/2150) 
 
 #### Installing necessary packages
 
-`pkg install python poppler`
+`pkg install python poppler ghostscript`
 
 ##### To compile psutils
 `pkg install clang make perl` 
@@ -29,4 +29,5 @@ run `termux-setup-storage`
 
 #### Copy the files 
 
-Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin/termux-*`
+Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin/termux-*`.  
+Run `echo "export PATH=$PATH:/data/data/com.termux/files/usr/local/bin" >> ~/.bashrc` 
