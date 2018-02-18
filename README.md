@@ -31,3 +31,5 @@ run `termux-setup-storage`
 
 Save `termux-url-opener` and `termux-file-editor` to `~/bin` and run `chmod u+x ~/bin/termux-*`.  
 Run `echo "export PATH=$PATH:/data/data/com.termux/files/usr/local/bin" >> ~/.bashrc` 
+
+Note: If asked to enter a filename by hand, don't forget to add the `.pdf` extension. The script will not work without it.
