@@ -19,7 +19,7 @@ $ mkdir -p $PREFIX/local/share/man
 $ make PERL=$PREFIX/bin/perl BINDIR=$PREFIX/local/bin INCLUDEDIR=$PREFIX/local/include MANDIR=$PREFIX/local/share/man/man1 -f Makefile.unix install
 ```
 #### To use the script with YouTube 
-You need to get youtube-dl and ytdl working
+You need to get `youtube-dl` and `ytdl` working
 
 ```
 pip3 install --upgrade youtube-dl 
