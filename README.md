@@ -5,7 +5,9 @@ PDF handling tools and other tools to be used with Termux
 ### Install
 Big thanks to [@tomty89](https://github.com/termux/termux-packages/issues/2150) for letting me know how to compile `psutils` in termux. 
 
+
 Note: Psutils can be now installed easily by typing `apt install psutils`.
+
 
 #### Installing necessary packages to handle PDF files
 
@@ -27,6 +29,12 @@ You need to get `youtube-dl` and `ytdl` working
 pip3 install --upgrade youtube-dl 
 pip3 install --upgrade mps-youtube 
 ```
+##### To use the clipboard directly from within Termux
+
+It is used to copy a markdown-formatted link including the name of the video into clipboard automatically.
+
+Install the [Termux:API](https://play.google.com/store/apps/details?id=com.termux.api) Android app and run `pkg install termux-api` in Termux to install the clipboard tools.                                #                                                       echo
+
 #### Configure Termux's access to storage
 
 run `termux-setup-storage`
