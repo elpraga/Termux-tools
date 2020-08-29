@@ -33,7 +33,7 @@ pip3 install --upgrade mps-youtube
 
 It is used to copy a markdown-formatted link including the name of the video into clipboard automatically.
 
-Install the [Termux:API](https://play.google.com/store/apps/details?id=com.termux.api) Android app and run `pkg install termux-api` in Termux to install the clipboard tools.                                #                                                       echo
+Install the [Termux:API](https://play.google.com/store/apps/details?id=com.termux.api) Android app and run `pkg install termux-api` in Termux to install the clipboard tools. 
 
 #### Configure Termux's access to storage
 
