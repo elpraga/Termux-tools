@@ -5,6 +5,8 @@ PDF handling tools and other tools to be used with Termux
 ### Install
 Big thanks to [@tomty89](https://github.com/termux/termux-packages/issues/2150) for letting me know how to compile `psutils` in termux. 
 
+Note: Psutils can be now installed easily by typing `apt install psutils`.
+
 #### Installing necessary packages to handle PDF files
 
 `pkg install python poppler ghostscript`
