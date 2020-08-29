@@ -2,15 +2,33 @@
 
 cd ~/storage/downloads/
 
+# Make sure termux-api is installed to copy to clipboard automatically                                           
+# https://play.google.com/store/apps/details?id=com.termux.api                                                  
+#        and                                            
+# pkg install termux-api                                
+#
+echo
+echo " Markfown formatted link to the video:"            
+echo " ====================================="            
+echo
+markdownlink=$(echo "* [`youtube-dl -e $1`]($1)")
+echo "     $markdownlink"
+termux-clipboard-set "$markdownlink"
+echo
+echo
 echo Checking available resolutions...
 echo 
 /data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/ytdl $1
 
 echo
 echo Please choose the file you want to download:
-echo "(enter 0 to download using youtube-dl)"
+echo "(enter 0 to download using youtube-dl or e to exit)"
 read  selected_file
 
+if [ $selected_file = "e" ]                             
+then                                                    
+        exit;
+else
 if [ $selected_file = "0" ]
 then
 	echo
@@ -20,4 +38,5 @@ else
 	echo
 	echo Running: ytdl -n$selected_file $1
 	/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/ytdl -n $selected_file $1
+fi
 fi
