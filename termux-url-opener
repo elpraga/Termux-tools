@@ -2,19 +2,64 @@
 
 cd ~/storage/downloads/
 
-# Make sure termux-api is installed to copy to clipboard automatically                                           
-# https://play.google.com/store/apps/details?id=com.termux.api                                                  
-#        and                                            
-# pkg install termux-api                                
+# Make sure termux-api is installed to copy to clipboardautomatically 
+# https://play.google.com/store/apps/details?id=com.termux.api
+#        and
+# pkg install termux-api
 #
 echo
-echo " Markfown formatted link to the video:"            
-echo " ====================================="            
+echo " Markfown-formated link to the video:"
+echo " ===================================="
 echo
 markdownlink=$(echo "* [`youtube-dl -e $1`]($1)")
 echo "     $markdownlink"
 termux-clipboard-set "$markdownlink"
 echo
+echo
+echo " press _e_ to exit" 
+echo " press _a_ to add to the links file"
+echo " press _g_ to add and get all the links"
+echo " press _n_ to clear the file and add the new link"
+echo " press _c_ to view the links file"
+echo " ...anything else to keep downloading..."
+echo
+read -p " press a key... "  selected_action
+
+break_loop="n"
+while [ "$break_loop" = "n" ]
+do
+
+	if [ "$selected_action" = "e" ]
+	then
+		exit;
+	elif [ "$selected_action" = "a" ]
+	then
+		echo "$markdownlink" >> ~/YT_links.md 
+		exit;
+	elif [ "$selected_action" = "g" ]
+	then
+		echo "$markdownlink" >> ~/YT_links.md 
+		cat ~/YT_links.md | termux-clipboard-set
+		exit;
+	elif [ "$selected_action" = "n" ]
+	then
+		rm ~/YT_links.md 
+		echo "$markdownlink" >> ~/YT_links.md 
+		exit;
+	elif [ "$selected_action" = "c" ]
+	then
+		echo
+		echo "`cat ~/YT_links.md`"
+		echo 
+		read -p " press a key... "  selected_action
+	else
+		if [ "$selected_action" != "c" ]
+		then
+			break_loop="y"
+		fi
+	fi
+done 
+
 echo
 echo Checking available resolutions...
 echo 
@@ -25,11 +70,17 @@ echo Please choose the file you want to download:
 echo "(enter 0 to download using youtube-dl or e to exit)"
 read  selected_file
 
-if [ $selected_file = "e" ]                             
-then                                                    
-        exit;
-else
-if [ $selected_file = "0" ]
+if [ "$selected_file" = "" ]
+then
+	selected_file="1"
+fi
+
+if [ "$selected_file" = "e" ]
+then
+	exit;
+fi
+
+if [ "$selected_file" = "0" ]
 then
 	echo
 	echo Running: youtube-dl $1
@@ -38,5 +89,4 @@ else
 	echo
 	echo Running: ytdl -n$selected_file $1
 	/data/data/com.termux/files/usr/bin/python /data/data/com.termux/files/usr/bin/ytdl -n $selected_file $1
-fi
 fi
