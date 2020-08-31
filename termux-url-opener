@@ -40,6 +40,8 @@ do
 	then
 		echo "$markdownlink" >> ~/YT_links.md 
 		cat ~/YT_links.md | termux-clipboard-set
+		rm ~/YT_links.md
+		touch ~/YT_links.md
 		exit;
 	elif [ "$selected_action" = "n" ]
 	then
