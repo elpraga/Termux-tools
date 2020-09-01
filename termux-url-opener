@@ -35,19 +35,22 @@ do
 	elif [ "$selected_action" = "a" ]
 	then
 		echo "$markdownlink" >> ~/YT_links.md 
-		exit;
+		#exit;
+		read -p " press a key... " 
 	elif [ "$selected_action" = "g" ]
 	then
 		echo "$markdownlink" >> ~/YT_links.md 
 		cat ~/YT_links.md | termux-clipboard-set
 		rm ~/YT_links.md
 		touch ~/YT_links.md
-		exit;
+		#exit;
+		read -p " press a key... " 
 	elif [ "$selected_action" = "n" ]
 	then
 		rm ~/YT_links.md 
 		echo "$markdownlink" >> ~/YT_links.md 
-		exit;
+		#exit;
+		read -p " press a key... " 
 	elif [ "$selected_action" = "c" ]
 	then
 		echo
