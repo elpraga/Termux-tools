@@ -8,15 +8,35 @@ cd ~/storage/downloads/
 # pkg install termux-api
 #
 echo
-echo " Markfown-formated link to the video:"
-echo " ===================================="
+read -p " Press _w_ for a Web page, anything else to continue:" web_or_video
+
+if [ "$web_or_video" = "w" ]
+then
+        echo
+        echo
+        echo " Markfown-formated link to the web page:"
+        echo " ======================================="
+        echo
+        weblink=$(echo "$1")
+        web_title=$(wget -qO- "$weblink" | gawk -v IGNORECASE=1 -v RS='</title' 'RT{gsub(/.*<title[^>]*>/,"");print;exit}')
+        #web_title=$(echo "$web_title" | recode html)
+        markdownlink="* [$web_title]($weblink)"
+        echo "     $markdownlink"
+        termux-clipboard-set "$markdownlink"
+else
+        echo
+        echo
+        echo " Markfown-formated link to the video:"
+        echo " ===================================="
+        echo
+        markdownlink=$(echo "* [`youtube-dl -e $1`]($1)")
+        echo "     $markdownlink"
+        termux-clipboard-set "$markdownlink"
+fi
+
 echo
-markdownlink=$(echo "* [`youtube-dl -e $1`]($1)")
-echo "     $markdownlink"
-termux-clipboard-set "$markdownlink"
 echo
-echo
-echo " press _e_ to exit" 
+echo " press _e_ or _q_ to exit" 
 echo " press _a_ to add to the links file"
 echo " press _g_ to add and get all the links"
 echo " press _n_ to clear the file and add the new link"
@@ -32,6 +52,9 @@ do
 	if [ "$selected_action" = "e" ]
 	then
 		exit;
+        elif [ "$selected_action" = "q" ]
+        then
+                exit;
 	elif [ "$selected_action" = "a" ]
 	then
 		echo "$markdownlink" >> ~/YT_links.md 
@@ -65,6 +88,11 @@ do
 	fi
 done 
 
+if [ "$web_or_video" = "w" ]
+then
+        exit;
+fi
+
 echo
 echo Checking available resolutions...
 echo 
@@ -83,6 +111,11 @@ fi
 if [ "$selected_file" = "e" ]
 then
 	exit;
+fi
+
+if [ "$selected_file" = "q" ]
+then
+        exit;
 fi
 
 if [ "$selected_file" = "0" ]
