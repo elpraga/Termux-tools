@@ -29,7 +29,7 @@ else
         echo " Markfown-formated link to the video:"
         echo " ===================================="
         echo
-        markdownlink=$(echo "* [`youtube-dl -e $1`]($1)")
+        markdownlink=$(echo "* [`youtube-dl -e $1`]($1) - `youtube-dl --get-duration $youtubelink` mins")
         echo "     $markdownlink"
         termux-clipboard-set "$markdownlink"
 fi
